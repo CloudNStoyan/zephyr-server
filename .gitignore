@@ -1,0 +1,9 @@
+.idea/
+obj/
+bin/
+.vs/
+packages/
+wwwroot/css
+appsettings.json
+appsettings.Development.json
+node_modules
