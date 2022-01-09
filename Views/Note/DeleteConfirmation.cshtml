@@ -1,0 +1,16 @@
+﻿@model Zephyr.DAL.NotePoco;
+
+@{
+    Layout = Layout;
+}
+
+@if (Model != null)
+{
+    <div class="wrapper">
+        <h2>Are you sure you want to delete <span class="note-title">@Model.Title</span>?</h2>
+        <form asp-controller="Note" asp-action="Delete" asp-route-id="@Model.NoteId">
+            <button type="submit">Yes</button>
+            <a asp-controller="Note" asp-action="Index">No</a>
+        </form>
+    </div>
+}

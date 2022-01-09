@@ -13,7 +13,7 @@ namespace Zephyr.Notes
             this.Database = database;
         }
 
-        public async Task<NotePoco[]> GetNotes(int offset = 0, int limit = 20)
+        public async Task<NotePoco[]?> GetNotes(int offset = 0, int limit = 20)
         {
             var notePocos = await this.Database.Query<NotePoco>(
                 "SELECT * FROM note OFFSET @offset LIMIT @limit;",
@@ -22,6 +22,28 @@ namespace Zephyr.Notes
                 );
 
             return notePocos.ToArray();
+        }
+
+        public async Task<NotePoco?> GetNoteById(int noteId)
+        {
+            var notePoco = await this.Database.QueryOne<NotePoco>(
+                "SELECT * FROM note WHERE note_id=@noteId;",
+                new NpgsqlParameter("noteId", noteId)
+            );
+
+            return notePoco;
+        }
+
+        public async Task DeleteNoteById(int noteId)
+        {
+            var notePoco = await this.GetNoteById(noteId);
+
+            if (notePoco == null)
+            {
+                return;
+            }
+
+            await this.Database.Delete(notePoco);
         }
     }
 }
