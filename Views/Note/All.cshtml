@@ -1,0 +1,31 @@
+﻿@model Zephyr.DAL.NotePoco[]
+
+@if (Model != null)
+{
+    <table class="note">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Created</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var note in Model)
+        {
+            <tr>
+                <td>@note.NoteId</td>
+                <td><a asp-controller="Note" asp-action="Index" asp-route-id="@note.NoteId">@note.Title</a></td>
+                <td>@note.Created</td>
+                <td>@note.LastUpdated</td>
+                <td>
+                    <a asp-controller="Note" asp-action="Edit" asp-route-id="@note.NoteId">Edit</a>
+                    <a asp-controller="Note" asp-action="DeleteConfirmation" asp-route-id="@note.NoteId">Delete</a>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+    }

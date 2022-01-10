@@ -24,6 +24,11 @@ namespace Zephyr.Notes
             return notePocos.ToArray();
         }
 
+        public async Task<int> CreateNote(NotePoco poco)
+        {
+            return await this.Database.Insert(poco);
+        }
+
         public async Task<NotePoco?> GetNoteById(int noteId)
         {
             var notePoco = await this.Database.QueryOne<NotePoco>(
@@ -44,6 +49,11 @@ namespace Zephyr.Notes
             }
 
             await this.Database.Delete(notePoco);
+        }
+
+        public async Task UpdateNote(NotePoco poco)
+        {
+            await this.Database.Update(poco);
         }
     }
 }

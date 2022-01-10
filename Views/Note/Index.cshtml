@@ -1,20 +1,13 @@
-﻿@model Zephyr.DAL.NotePoco[]
-
+﻿@model Zephyr.DAL.NotePoco;
 @{
     Layout = Layout;
 }
 
-@if (Model != null)
-{
-    foreach (var note in Model)
-    {
-        <div class="note">
-            <h2>@note.Title</h2>
-            <p>@note.Content</p>
-            <div>
-                <span>@note.Created</span>
-                <span>@note.LastUpdated</span>
-            </div>
-        </div>
-    }   
-}
+<div class="note">
+    <h2>@Model?.Title</h2>
+    <p>@Model?.Content</p>
+    <div>
+        <span>@Model?.Created</span>
+        <span>@Model?.LastUpdated</span>
+    </div>
+</div>
