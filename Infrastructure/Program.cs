@@ -6,6 +6,7 @@ using Zephyr;
 using Zephyr.DAL;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.WebHost.UseKestrel(x => x.AddServerHeader = false);
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
@@ -48,10 +49,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//app.UseHttpsRedirection();
 app.UseStaticFiles();
-
-app.UseRouting();
 
 app.UseAuthorization();
 
