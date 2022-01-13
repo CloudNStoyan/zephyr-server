@@ -1,0 +1,39 @@
+.runes-wrapper {
+    margin-top: 10px;
+
+    .styles-container {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+
+        a {
+            &:not(.active) {
+                img {
+                    filter: grayscale(1);
+                }
+            }
+        }
+    }
+
+    .slots-container {
+        display: flex;
+        flex-flow: column nowrap;
+
+        .slot {
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-evenly;
+
+            img {
+                height: 48px;
+                width: 48px;
+            }
+
+            a:not(.active) {
+                img {
+                    filter: grayscale(1);
+                }
+            }
+        }
+    }
+}

@@ -4,6 +4,7 @@ bin/
 .vs/
 packages/
 wwwroot/css
+wwwroot/static/lol/
 appsettings.json
 appsettings.Development.json
 node_modules
