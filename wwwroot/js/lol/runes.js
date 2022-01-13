@@ -1,7 +1,6 @@
 ﻿(async () => {
 
     const runesReforged = await fetch('/js/lol/runesReforged.json').then(resp => resp.json());
-    console.log(runesReforged)
 
     const iconPrefix = '/static/lol/';
 
@@ -9,16 +8,15 @@
     currentRunes.primaryPerkIds = [];
     currentRunes.subPerkIds = [];
 
-
-
     const primaryStyleContainer = document.querySelector('.primary-container .styles-container');
     const primarySlotsContainer = document.querySelector('.primary-container .slots-container');
     const subStyleContainer = document.querySelector('.sub-container .styles-container');
     const subSlotsContainer = document.querySelector('.sub-container .slots-container');
 
-    const updateUI = () => {
+    const updateDom = () => {
         primaryStyleContainer.querySelectorAll('a').forEach(x => {
-            if (x.dataset.id != currentRunes.primaryStyle) {
+            const id = Number(x.dataset.id);
+            if (id !== currentRunes.primaryStyle) {
                 x.classList.remove('active');
                 return;
             }
@@ -37,7 +35,8 @@
         });
 
         subStyleContainer.querySelectorAll('a').forEach(x => {
-            if (x.dataset.id != currentRunes.subStyle) {
+            const id = Number(x.dataset.id);
+            if (id !== currentRunes.subStyle) {
                 x.classList.remove('active');
                 return;
             }
@@ -47,7 +46,7 @@
 
         subSlotsContainer.querySelectorAll('a').forEach(x => {
             const id = Number(x.dataset.id);
-            if (!currentRunes.subPerkIds.filter(x => x.id == id).length > 0) {
+            if (!currentRunes.subPerkIds.filter(x => x.id === id).length > 0) {
                 x.classList.remove('active');
                 return;
             }
@@ -64,6 +63,9 @@
             e.preventDefault();
 
             updatePrimaryStyle(style.id);
+
+            subStyleContainer.innerHTML = '';
+            runesReforged.filter(x => x.id != style.id).forEach(x => seedSubContainer(x));
         });
         const styleImg = document.createElement('img');
         styleImg.alt = style.name;
@@ -74,7 +76,7 @@
     };
 
     const updatePrimaryStyle = (styleId) => {
-        const style = runesReforged.find(x => x.id == styleId);
+        const style = runesReforged.find(x => x.id === styleId);
 
         currentRunes.primaryStyle = style.id;
 
@@ -93,8 +95,7 @@
                     e.preventDefault();
 
                     currentRunes.primaryPerkIds[row] = rune.id;
-                    updateUI();
-                    console.log(currentRunes);
+                    updateDom();
                 });
 
                 const runeImg = document.createElement('img');
@@ -106,7 +107,7 @@
             primarySlotsContainer.appendChild(slotEl);
         });
 
-        updateUI();
+        updateDom();
     };
 
     const seedSubContainer = (style) => {
@@ -127,7 +128,7 @@
     };
 
     const updateSubStyle = (styleId) => {
-        const style = runesReforged.find(x => x.id == styleId);
+        const style = runesReforged.find(x => x.id === styleId);
 
         currentRunes.subStyle = style.id;
 
@@ -145,11 +146,11 @@
                 runeEl.addEventListener('click', (e) => {
                     e.preventDefault();
 
-                    const runeFromSameRow = currentRunes.subPerkIds.find(x => x.row == row);
+                    const runeFromSameRow = currentRunes.subPerkIds.find(x => x.row === row);
 
-                    if (runeFromSameRow && runeFromSameRow.id != rune.id) {
-                        currentRunes.subPerkIds = [...currentRunes.subPerkIds.filter(x => x.id != runeFromSameRow.id), { id: rune.id, row: row }];
-                        updateUI();
+                    if (runeFromSameRow && runeFromSameRow.id !== rune.id) {
+                        currentRunes.subPerkIds = [...currentRunes.subPerkIds.filter(x => x.id !== runeFromSameRow.id), { id: rune.id, row: row }];
+                        updateDom();
                         return;
                     }
 
@@ -158,7 +159,7 @@
                     }
 
                     currentRunes.subPerkIds.push({ id: rune.id, row: row });
-                    updateUI();
+                    updateDom();
                     console.log(currentRunes);
                 });
 
@@ -171,11 +172,10 @@
             subSlotsContainer.appendChild(slotEl);
         });
 
-        updateUI();
+        updateDom();
     };
 
     runesReforged.forEach(style => {
         seedPrimaryContainer(style);
-        seedSubContainer(style);
     });
 })();
