@@ -1,0 +1,67 @@
+﻿@model Zephyr.Areas.LoL.RunePage.RunePageViewModel
+
+@{
+    string actionName = ViewData["actionName"].ToString();
+}
+
+@section head {
+    <link rel="stylesheet" href="/css/lol/runes.css"/>
+}
+
+@section footer {
+    <script src="/js/lol/runePageCreator.js"></script>
+}
+
+<div class="wrapper">
+    <h1>
+        @if (actionName == "Edit")
+        {
+            <span>Editing Rune page</span>
+        }
+        else
+        {
+            <span>Creating Rune page</span>
+        }
+    </h1>
+
+    <form asp-controller="RunePage" asp-action="@actionName" method="POST">
+        <input type="hidden" asp-for="PrimaryStyleId" value="@Model?.PrimaryStyleId"/>
+        <input type="hidden" asp-for="SubStyleId" value="@Model?.SubStyleId"/>
+        <input type="hidden" asp-for="PerkIds" value="@Model?.PerkIds"/>
+        
+        <div class="form-group">
+            <label asp-for="Name">Name</label>
+            <input asp-for="Name" value="@Model?.Name"/>
+        </div>
+        
+        <div class="runes-wrapper">
+            <div class="primary-container">
+                <div class="styles-container"></div>
+                <div class="slots-container"></div>
+            </div>
+            <div class="sub-container">
+                <div class="styles-container"></div>
+                <div class="slots-container"></div>
+            </div>
+            <div class="stat-container">
+
+            </div>
+        </div>
+
+        @if (actionName == "Edit")
+        {
+            <input type="hidden" asp-for="RunePageId" value="@Model?.RunePageId"/>
+        }
+
+        @if (Model?.ErrorMessages != null)
+        {
+            <div>
+                @foreach (string errorMessage in Model.ErrorMessages)
+                {
+                    <div>@errorMessage</div>
+                }
+            </div>
+        }
+        <button type="submit">Save</button>
+    </form>
+</div>

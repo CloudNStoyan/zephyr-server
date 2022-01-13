@@ -1,0 +1,53 @@
+[
+    [
+        {
+            "id": 5008,
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "name": "Adaptive Force"
+        },
+        {
+            "id": 5005,
+            "icon": "perk-images/StatMods/StatModsAttackSpeedIcon.png",
+            "name": "Attack Speed"
+        },
+        {
+            "id": 5007,
+            "icon": "perk-images/StatMods/StatModsCDRScalingIcon.png",
+            "name": "CDR"
+        }
+    ],
+    [
+        {
+            "id": 5008,
+            "icon": "perk-images/StatMods/StatModsAdaptiveForceIcon.png",
+            "name": "Adaptive Force"
+        },
+        {
+            "id": 5002,
+            "icon": "perk-images/StatMods/StatModsArmorIcon.png",
+            "name": "Armor"
+        },
+        {
+            "id": 5003,
+            "icon": "perk-images/StatMods/StatModsMagicResIcon.png",
+            "name": "Magic Resist"
+        }
+    ],
+    [
+        {
+            "id": 5001,
+            "icon": "perk-images/StatMods/StatModsHealthScalingIcon.png",
+            "name": "Health"
+        },
+        {
+            "id": 5002,
+            "icon": "perk-images/StatMods/StatModsArmorIcon.png",
+            "name": "Armor"
+        },
+        {
+            "id": 5003,
+            "icon": "perk-images/StatMods/StatModsMagicResIcon.png",
+            "name": "Magic Resist"
+        }
+    ]
+]

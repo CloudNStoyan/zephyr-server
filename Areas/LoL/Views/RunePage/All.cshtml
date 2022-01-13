@@ -1,0 +1,31 @@
+﻿@model Zephyr.DAL.RunePagePoco[]
+
+@if (Model is not null)
+{
+    <div class="wrapper">
+        <table class="rune-pages">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var runePagePoco in Model)
+            {
+                <tr>
+                    <td>@runePagePoco.RunePageId</td>
+                    <td>@runePagePoco.Name</td>
+                    <td>
+                        <a class="btn orange"
+                           asp-area="LoL" asp-controller="RunePage" asp-action="Edit" asp-route-id="@runePagePoco.RunePageId">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+}

@@ -36,4 +36,18 @@
             }
         }
     }
+
+    .stat-container {
+        width: fit-content;
+        width: -moz-fit-content;
+        margin: 0 auto;
+
+        a {
+            &:not(.active) {
+                img {
+                    filter: grayscale(1);
+                }
+            }
+        }
+    }
 }

@@ -14,4 +14,19 @@
         [Column(Name = "last_updated")]
         public DateTime LastUpdated { get; set; }
     }
+
+    [Table(Name = "rune_page", Schema = "public")]
+    public class RunePagePoco
+    {
+        [Column(IsPrimaryKey = true, Name = "rune_page_id")]
+        public int RunePageId { get; set; }
+        [Column(Name = "name")]
+        public string Name { get; set; }
+        [Column(Name = "perk_ids")]
+        public Array PerkIds { get; set; }
+        [Column(Name = "primary_style_id")]
+        public int PrimaryStyleId { get; set; }
+        [Column(Name = "sub_style_id")]
+        public int SubStyleId { get; set; }
+    }
 }
