@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Zephyr.DAL;
 using Zephyr.Infrastructure;
 
 namespace Zephyr.Areas.LoL.RunePage
@@ -37,14 +36,7 @@ namespace Zephyr.Areas.LoL.RunePage
                 return this.RedirectToAction("All");
             }
 
-            var model = new RunePageViewModel
-            {
-                Name = runePagePoco.Name,
-                PerkIds = string.Join(" ", runePagePoco.PerkIds.Cast<int>()),
-                PrimaryStyleId = runePagePoco.PrimaryStyleId,
-                SubStyleId = runePagePoco.SubStyleId,
-                RunePageId = runePagePoco.RunePageId
-            };
+            var model = RunePageViewModel.FromRunePagePoco(runePagePoco);
 
             this.ViewData["actionName"] = nameof(this.Edit);
             return this.View("CreateOrEdit", model);
@@ -59,20 +51,11 @@ namespace Zephyr.Areas.LoL.RunePage
                 return this.View("CreateOrEdit", model);
             }
 
-            int[] perkIds;
-
-            try
-            {
-                perkIds = model.PerkIds.Split(' ').Select(int.Parse).ToArray();
-            }
-            catch
-            {
-                perkIds = Array.Empty<int>();
-            }
-
             const int perkIdsDesiredLength = 9;
 
-            if (perkIds.Length != perkIdsDesiredLength)
+            var runePagePoco = model.ToRunePagePoco();
+
+            if (runePagePoco.PerkIds.Length != perkIdsDesiredLength)
             {
                 const string errorMessage = "Error parsing Perk Ids";
                 model.ErrorMessages = model.ErrorMessages != null
@@ -82,14 +65,6 @@ namespace Zephyr.Areas.LoL.RunePage
                 this.ViewData["actionName"] = nameof(this.Create);
                 return this.View("CreateOrEdit", model);
             }
-
-            var runePagePoco = new RunePagePoco
-            {
-                Name = model.Name,
-                PerkIds = perkIds,
-                PrimaryStyleId = model.PrimaryStyleId,
-                SubStyleId = model.SubStyleId
-            };
 
             await this.RunePageService.CreateRunePage(runePagePoco);
 
@@ -105,20 +80,11 @@ namespace Zephyr.Areas.LoL.RunePage
                 return this.View("CreateOrEdit", model);
             }
 
-            int[] perkIds;
-
-            try
-            {
-                perkIds = model.PerkIds.Split(' ').Select(int.Parse).ToArray();
-            }
-            catch
-            {
-                perkIds = Array.Empty<int>();
-            }
-
             const int perkIdsDesiredLength = 9;
 
-            if (perkIds.Length != perkIdsDesiredLength)
+            var runePagePoco = model.ToRunePagePoco();
+
+            if (runePagePoco.PerkIds.Length != perkIdsDesiredLength)
             {
                 const string errorMessage = "Error parsing Perk Ids";
                 model.ErrorMessages = model.ErrorMessages != null
@@ -128,15 +94,6 @@ namespace Zephyr.Areas.LoL.RunePage
                 this.ViewData["actionName"] = nameof(this.Edit);
                 return this.View("CreateOrEdit", model);
             }
-
-            var runePagePoco = new RunePagePoco
-            {
-                Name = model.Name,
-                PerkIds = perkIds,
-                PrimaryStyleId = model.PrimaryStyleId,
-                SubStyleId = model.SubStyleId,
-                RunePageId = model.RunePageId
-            };
 
             await this.RunePageService.UpdateRunePage(runePagePoco);
 
