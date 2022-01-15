@@ -1,0 +1,44 @@
+@import '../colors.scss';
+
+$transition-time: 0.15s;
+
+.input-wrapper {
+    position: relative;
+    width: fit-content;
+    width: -moz-fit-content;
+
+    input {
+        border: 0;
+        outline: 0;
+        background-color: transparent;
+        border-bottom: 3px solid $color-lightpurple;
+        transition: border $transition-time linear;
+
+        &::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        &:focus, &:not(:placeholder-shown) {
+            border-bottom-color: $color-purple;
+            padding-top: 5px;
+
+            ~ label {
+                color: $color-purple;
+                transform: translateY(-12px);
+                font-size: 80%;
+                font-weight: 600;
+                left: 2px;
+            }
+        }
+    }
+
+    label {
+        position: absolute;
+        top: 0;
+        left: 5px;
+        padding-right: 5px;
+        transition-duration: $transition-time;
+        transition-property: color, transform, left, font-size, font-weight;
+        transition-timing-function: linear;
+    }
+}

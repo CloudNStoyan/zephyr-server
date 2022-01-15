@@ -28,10 +28,10 @@
         <input type="hidden" asp-for="PrimaryStyleId" value="@Model?.PrimaryStyleId"/>
         <input type="hidden" asp-for="SubStyleId" value="@Model?.SubStyleId"/>
         <input type="hidden" asp-for="PerkIds" value="@Model?.PerkIds"/>
-        
-        <div class="form-group">
+
+        <div class="input-wrapper">
+            <input asp-for="Name" autocomplete="off" placeholder="Name" value="@Model?.Name"/>
             <label asp-for="Name">Name</label>
-            <input asp-for="Name" value="@Model?.Name"/>
         </div>
         
         <div class="runes-wrapper">
@@ -62,6 +62,6 @@
                 }
             </div>
         }
-        <button type="submit">Save</button>
+        <button class="btn cyan" type="submit">Save</button>
     </form>
 </div>
