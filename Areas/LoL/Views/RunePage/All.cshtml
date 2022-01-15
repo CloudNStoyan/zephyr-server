@@ -1,5 +1,9 @@
 ﻿@model Zephyr.DAL.RunePagePoco[]
 
+@section footer {
+    <script src="/js/lol/send-rune-page.js"></script>
+}
+
 @if (Model is not null)
 {
     <div class="wrapper">
@@ -22,6 +26,7 @@
                            asp-area="LoL" asp-controller="RunePage" asp-action="Edit" asp-route-id="@runePagePoco.RunePageId">
                             <i class="fas fa-edit"></i>
                         </a>
+                        <a data-id="@runePagePoco.RunePageId" href="#" class="btn cyan send-rune-page">Send</a>
                     </td>
                 </tr>
             }

@@ -49,4 +49,10 @@ main {
         color: $color-light;
         background-color: $color-green;
     }
+
+    &.cyan {
+        border: 1px solid $color-cyan;
+        color: $color-light;
+        background-color: $color-cyan;
+    }
 }
