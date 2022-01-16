@@ -1,0 +1,57 @@
+.wrapper {
+
+    .rune-page {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        margin: 10px;
+        border: 1px solid lightgray;
+        padding: 10px;
+        background-color: #f9f9f9;
+
+        .header {
+            border-right: 1px solid lightgray;
+            margin-right: 15px;
+
+            .title {
+                font-weight: 600;
+                text-align: center;
+                color: darkgray;
+            }
+        }
+    }
+
+    .actions {
+        display: flex;
+        flex-flow: column nowrap;
+        align-items: center;
+        justify-content: space-around;
+
+        a {
+            margin: 5px;
+            width: 100%;
+        }
+    }
+
+    .runes {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+
+        .rune {
+            width: 40px;
+            height: 40px;
+            padding: 2px;
+            border: 1px solid lightgray;
+            background-color: white;
+            border-radius: 50%;
+            margin: 5px;
+
+            img {
+                object-fit: scale-down;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}

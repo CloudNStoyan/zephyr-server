@@ -1,4 +1,11 @@
-﻿@model Zephyr.DAL.RunePagePoco[]
+﻿@using Zephyr.Areas.LoL.RunePage
+@model Zephyr.DAL.RunePagePoco[]
+
+@inject PerkService perkService;
+
+@section head {
+    <link rel="stylesheet" href="/css/LoL/rune-page-all.css"/>
+}
 
 @section footer {
     <script src="/js/lol/send-rune-page.js"></script>
@@ -7,30 +14,33 @@
 @if (Model is not null)
 {
     <div class="wrapper">
-        <table class="rune-pages">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach (var runePagePoco in Model)
-            {
-                <tr>
-                    <td>@runePagePoco.RunePageId</td>
-                    <td>@runePagePoco.Name</td>
-                    <td>
-                        <a class="btn orange"
-                           asp-area="LoL" asp-controller="RunePage" asp-action="Edit" asp-route-id="@runePagePoco.RunePageId">
-                            <i class="fas fa-edit"></i>
-                        </a>
-                        <a data-id="@runePagePoco.RunePageId" href="#" class="btn cyan send-rune-page">Send</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
+        @foreach (var runePagePoco in Model)
+        {
+            var runePagePerkInfos =
+                runePagePoco.PerkIds.Cast<int>().Take(6)
+                    .Select(perkId => perkService.Perks.FirstOrDefault(p => p.Id == perkId))
+                    .ToArray();
+
+            <div class="rune-page">
+                <div class="header">
+                    <div class="title">@runePagePoco.Name</div>
+                    <div class="runes">
+                        @foreach (var perkInfo in runePagePerkInfos)
+                        {
+                            <div class="rune">
+                                <img src="@perkInfo?.Icon" alt="@perkInfo?.Name"/>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="actions">
+                    <a class="btn orange"
+                       asp-area="LoL" asp-controller="RunePage" asp-action="Edit" asp-route-id="@runePagePoco.RunePageId">Edit</a>
+                    <a data-id="@runePagePoco.RunePageId" href="#" class="btn cyan send-rune-page">Send</a>
+                </div>
+               
+            </div>
+        }
+
     </div>
 }
