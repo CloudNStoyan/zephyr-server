@@ -38,7 +38,7 @@ namespace Zephyr.Areas.LoL.API
                 return this.Json(new { status_code = 404, error = "RunePage with that Id doesn't exist" });
             }
 
-            await this.LcuService.PutRunePageAsCurrent(runePagePoco);
+            await this.LcuService.ImportPage(runePagePoco);
 
             return this.Json(new { status_code = 200, success = true });
         } 

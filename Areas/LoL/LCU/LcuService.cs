@@ -10,6 +10,7 @@ using Zephyr.DAL;
 namespace Zephyr.Areas.LoL.LCU
 {
     [SupportedOSPlatform("windows")]
+    // ReSharper disable once ClassNeverInstantiated.Global
     public class LcuService
     {
         private static LcuInfo? GetPortAndToken()
@@ -84,7 +85,65 @@ namespace Zephyr.Areas.LoL.LCU
             return JsonConvert.DeserializeObject<RunePageDto[]>(json);
         }
 
-        public async Task PutRunePageAsCurrent(RunePagePoco runePagePoco)
+        public async Task DeleteRunePage(int pageId)
+        {
+            using var client = this.CreateClient();
+
+            if (client == null)
+            {
+                return;
+            }
+
+            string resource = $"lol-perks/v1/pages/{pageId}";
+
+            var request = new HttpRequestMessage(HttpMethod.Delete, resource);
+
+            await client.SendAsync(request);
+        }
+
+        public async Task<RunePageDto?> CreateRunePage(RunePageDto runePageDto)
+        {
+            using var client = this.CreateClient();
+
+            if (client == null)
+            {
+                return null;
+            }
+
+            const string resource = "lol-perks/v1/pages/";
+
+            var request = new HttpRequestMessage(HttpMethod.Post, resource);
+
+            string json = JsonConvert.SerializeObject(runePageDto, Formatting.Indented);
+
+            request.Content = new StringContent(json, Encoding.ASCII, "application/json");
+
+            var response = await client.SendAsync(request);
+
+            return JsonConvert.DeserializeObject<RunePageDto>(await response.Content.ReadAsStringAsync());
+        }
+
+        public async Task PutCurrentRunePage(int pageId)
+        {
+            using var client = this.CreateClient();
+
+            if (client == null)
+            {
+                return;
+            }
+
+            const string resource = "lol-perks/v1/currentpage";
+
+            var request = new HttpRequestMessage(HttpMethod.Put, resource);
+
+            string json = JsonConvert.SerializeObject(pageId, Formatting.Indented);
+
+            request.Content = new StringContent(json, Encoding.ASCII, "application/json");
+
+            await client.SendAsync(request);
+        }
+
+        public async Task ImportPage(RunePagePoco runePagePoco)
         {
             var currentRunePages = await this.GetRunePages();
 
@@ -102,6 +161,8 @@ namespace Zephyr.Areas.LoL.LCU
                 return;
             }
 
+            await this.DeleteRunePage(currentRunePage.Id);
+
             var runePageDto = new RunePageDto
             {
                 Id = currentRunePage.Id,
@@ -111,15 +172,14 @@ namespace Zephyr.Areas.LoL.LCU
                 SubStyleId = runePagePoco.SubStyleId
             };
 
-            string resource = $"lol-perks/v1/pages/{runePageDto.Id}";
+            var createdRunePage = await this.CreateRunePage(runePageDto);
 
-            var request = new HttpRequestMessage(HttpMethod.Put, resource);
+            if (createdRunePage == null)
+            {
+                return;
+            }
 
-            string json = JsonConvert.SerializeObject(runePageDto, Formatting.Indented);
-
-            request.Content = new StringContent(json, Encoding.ASCII, "application/json");
-
-            await client.SendAsync(request);
+            await this.PutCurrentRunePage(createdRunePage.Id);
         }
     }
 
