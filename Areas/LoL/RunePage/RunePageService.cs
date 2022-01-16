@@ -15,7 +15,7 @@ namespace Zephyr.Areas.LoL.RunePage
         public async Task<RunePagePoco[]> GetRunePages(int offset = 0, int limit = 20)
         {
             var runePagePocos = await this.Database.Query<RunePagePoco>(
-                "SELECT * FROM rune_page ORDER BY rune_page_id ASC OFFSET @offset LIMIT @limit;",
+                "SELECT * FROM rune_page ORDER BY rune_page_id DESC OFFSET @offset LIMIT @limit;",
                 new NpgsqlParameter("offset", offset),
                 new NpgsqlParameter("limit", limit)
             );
