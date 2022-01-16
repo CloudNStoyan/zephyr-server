@@ -28,7 +28,7 @@
   </Target>
 
   <Target Name="Compile SCSS" BeforeTargets="CopyFilesToPublishDirectory">
-    <Exec Command="npm run build:css" />
+    <Exec Command="npm run build" />
     <Copy SourceFiles="$(ProjectDir)wwwroot/css/style.css" DestinationFolder="$(PublishDir)wwwroot/css" />
   </Target>
 
