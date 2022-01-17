@@ -42,5 +42,10 @@ namespace Zephyr.Areas.LoL.RunePage
         {
             await this.Database.Update(runePagePoco);
         }
+
+        public async Task DeleteRunePage(RunePagePoco runePagePoco)
+        {
+            await this.Database.Delete(runePagePoco);
+        }
     }
 }

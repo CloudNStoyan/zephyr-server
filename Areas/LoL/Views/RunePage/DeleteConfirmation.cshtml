@@ -1,0 +1,15 @@
+﻿@model Zephyr.DAL.RunePagePoco
+
+@section head {
+    <link rel="stylesheet" href="/css/LoL/rune-page-delete.css"/>
+}
+
+<div class="wrapper">
+    <h2>You are about to delete <span class="title">@Model?.Name</span></h2>
+    <form
+        asp-area="LoL" asp-controller="RunePage" asp-action="Delete" asp-route-id="@Model?.RunePageId" method="POST">
+        <a asp-area="LoL" asp-controller="RunePage" asp-action="All"
+           class="btn green">Go back</a>
+        <button class="btn-delete" type="submit">Delete</button>
+    </form>
+</div>

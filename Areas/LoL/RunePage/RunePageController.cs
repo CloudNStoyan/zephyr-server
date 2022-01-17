@@ -99,5 +99,32 @@ namespace Zephyr.Areas.LoL.RunePage
 
             return this.RedirectToAction("All");
         }
+
+        public async Task<IActionResult> DeleteConfirmation(int id)
+        {
+            var runePagePoco = await this.RunePageService.GetRunePageById(id);
+
+            if (runePagePoco == null)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            return this.View(runePagePoco);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var runePagePoco = await this.RunePageService.GetRunePageById(id);
+
+            if (runePagePoco == null)
+            {
+                return this.RedirectToAction("All");
+            }
+
+            await this.RunePageService.DeleteRunePage(runePagePoco);
+
+            return this.RedirectToAction("All");
+        }
     }
 }

@@ -1,0 +1,27 @@
+@import '../colors.scss';
+
+.wrapper {
+    h2 {
+        margin: 10px;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        padding: 0 10px;
+    }
+
+    .title {
+        color: $color-purple;
+    }
+
+    .btn-delete {
+        color: $color-red;
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        font-weight: 600;
+    }
+}

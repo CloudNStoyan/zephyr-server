@@ -36,9 +36,12 @@
                     </div>
                 </div>
                 <div class="actions">
+                    <a data-id="@runePagePoco.RunePageId" href="#" class="btn cyan send-rune-page">Send</a>
                     <a class="btn orange"
                        asp-area="LoL" asp-controller="RunePage" asp-action="Edit" asp-route-id="@runePagePoco.RunePageId">Edit</a>
-                    <a data-id="@runePagePoco.RunePageId" href="#" class="btn cyan send-rune-page">Send</a>
+                    <a class="btn red"
+                       asp-area="LoL" asp-controller="RunePage" asp-action="DeleteConfirmation" 
+                       asp-route-id="@runePagePoco.RunePageId">Delete</a>
                 </div>
 
             </div>
