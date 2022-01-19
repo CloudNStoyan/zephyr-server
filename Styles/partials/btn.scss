@@ -9,6 +9,12 @@
     text-decoration: none;
     text-align: center;
     font-weight: 600;
+    transition: filter 0.15s linear;
+    cursor: pointer;
+
+    &:active, &:hover {
+        filter: brightness(0.8);
+    }
 
     &.orange {
         border: 1px solid $color-orange;
