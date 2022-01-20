@@ -1,5 +1,9 @@
 ﻿@import '../colors.scss';
 
+$text-color-light: rgba(255,255,255,.9);
+
+$text-color-dark: rgba(0,0,0,.9);
+
 .btn {
     display: block;
     padding: 10px 15px;
@@ -12,31 +16,51 @@
     transition: filter 0.15s linear;
     cursor: pointer;
 
-    &:active, &:hover {
-        filter: brightness(0.8);
-    }
-
     &.orange {
-        border: 1px solid $color-orange;
-        color: $color-dark;
+        border-color: $color-orange;
+        color: $text-color-dark;
         background-color: $color-orange;
+
+        &:hover {
+            border-color: $color-darkorange;
+            background-color: $color-darkorange;
+            color: $color-dark;
+        }
     }
 
     &.red {
-        border: 1px solid $color-red;
-        color: $color-light;
+        border-color: $color-red;
+        color: $text-color-light;
         background-color: $color-red;
+
+        &:hover {
+            border-color: $color-darkred;
+            background-color: $color-darkred;
+            color: $color-light;
+        }
     }
 
     &.green {
-        border: 1px solid $color-green;
-        color: $color-light;
+        border-color: $color-green;
+        color: $text-color-light;
         background-color: $color-green;
+
+        &:hover {
+            border-color: $color-darkgreen;
+            background-color: $color-darkgreen;
+            color: $color-light;
+        }
     }
 
     &.cyan {
-        border: 1px solid $color-cyan;
-        color: $color-light;
+        border-color: $color-cyan;
+        color: $text-color-light;
         background-color: $color-cyan;
+
+        &:hover {
+            border-color: $color-darkcyan;
+            background-color: $color-darkcyan;
+            color: $color-light;
+        }
     }
 }
