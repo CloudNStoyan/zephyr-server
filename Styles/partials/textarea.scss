@@ -1,0 +1,17 @@
+﻿@import '../colors.scss';
+
+.textarea {
+    outline: 0;
+    padding: 5px;
+    background-color: transparent;
+    border: 3px solid $color-lightpurple;
+
+    &::-webkit-input-placeholder {
+        color: gray;
+    }
+
+    &:focus, &:not(:placeholder-shown) {
+        color: $color-dark;
+        border-color: $color-purple;
+    }
+}

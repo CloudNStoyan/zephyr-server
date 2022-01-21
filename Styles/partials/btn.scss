@@ -13,8 +13,12 @@ $text-color-dark: rgba(0,0,0,.9);
     text-decoration: none;
     text-align: center;
     font-weight: 600;
-    transition: filter 0.15s linear;
+    transition: transform 0.10s linear;
     cursor: pointer;
+
+    &:focus {
+        transform: scale(0.95);
+    }
 
     &.orange {
         border-color: $color-orange;
