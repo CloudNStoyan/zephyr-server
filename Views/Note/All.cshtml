@@ -5,8 +5,8 @@
 }
 
 <a class="btn green"
-    asp-controller="Note" asp-action="Create">
-    <i class="fas fa-plus"></i> New
+   asp-controller="Note" asp-action="Create">
+    New note
 </a>
 @if (Model != null)
 {
@@ -19,11 +19,11 @@
                     <div class="actions">
                         <a class="btn orange"
                             asp-controller="Note" asp-action="Edit" asp-route-id="@note.NoteId">
-                            <i class="far fa-edit"></i>
+                            Edit
                         </a>
                         <a class="btn red"
                             asp-controller="Note" asp-action="DeleteConfirmation" asp-route-id="@note.NoteId">
-                            <i class="fas fa-times"></i>
+                            Delete
                         </a>
                     </div>
                 </div>

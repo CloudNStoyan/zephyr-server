@@ -17,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Styles\Note\" />
     <Folder Include="wwwroot\static\lol\" />
   </ItemGroup>
 
